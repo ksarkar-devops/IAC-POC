@@ -38,6 +38,9 @@ jobs:
         working-directory: ${{ env.AZURE_FUNCTION_DIR }}
         run: terraform validate
 
+      - name: Destroy runs existing
+        run: terraform destroy
+
       - name: Terraform Plan
         working-directory: ${{ env.AZURE_FUNCTION_DIR }}
         run: terraform plan -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="tenant_id=${{ secrets.ARM_TENANT_ID }}" -var="subscription_id=${{ secrets.ARM_SUBSCRIPTION_ID }}"
