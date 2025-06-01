@@ -1,9 +1,3 @@
-variable "client_id" {}
-variable "client_secret" {}
-variable "tenant_id" {}
-variable "subscription_id" {}
-
-
 # Configure the Azure provider
 terraform {
   required_version = ">= 1.3.0"
