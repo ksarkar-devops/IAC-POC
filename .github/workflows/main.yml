@@ -42,9 +42,6 @@ jobs:
         working-directory: ${{ env.AZURE_FUNCTION_DIR }}
         run: terraform validate
 
-      - name: Destroy runs existing
-        run: terraform destroy
-
       - name: Terraform Plan
         working-directory: ${{ env.AZURE_FUNCTION_DIR }}
         run: terraform plan -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="tenant_id=${{ secrets.ARM_TENANT_ID }}" -var="subscription_id=${{ secrets.ARM_SUBSCRIPTION_ID }}"
@@ -58,10 +55,6 @@ jobs:
         working-directory: ${{ env.AZURE_FUNCTION_DIR }}
         run: |
             echo "FUNCTION_APP_NAME=$(terraform output -raw function_app_name)" >> $GITHUB_ENV
-
-      - name: Write Function App Name from Terraform Output
-        id: tf_output_write
-        run: echo "name of func - ${{ env.FUNCTION_APP_NAME }}"
 
   publish:
     name: Deploy Function Code
@@ -84,6 +77,10 @@ jobs:
       - name: Zip package
         run: |
           cd published && zip -r ../function.zip .
+
+      - name: Write Function App Name from Terraform Output
+        id: tf_output_write
+        run: echo "name of func - ${{ env.FUNCTION_APP_NAME }}"
 
       - name: Upload to Azure Function
         uses: Azure/functions-action@v1
