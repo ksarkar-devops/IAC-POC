@@ -59,10 +59,9 @@ jobs:
         run: |
             echo "FUNCTION_APP_NAME=$(terraform output -raw function_app_name)" >> $GITHUB_ENV
 
-      - name: Destroy runs if the previous step failed or was skipped
-        if: ${{ failure() || cancelled() || steps.Terraform_Apply.outcome != 'success' }}
-        run: terraform destroy
-
+      - name: Write Function App Name from Terraform Output
+        id: tf_output_write
+        run: echo "name of func - ${{ env.FUNCTION_APP_NAME }}"
 
   publish:
     name: Deploy Function Code
