@@ -33,7 +33,7 @@ resource "random_string" "suffix" {
 
 resource "azurerm_resource_group" "rg" {
   name     = "funcapp-rg"
-  location = "East US"
+  location = "Sweden Central"
 }
 
 resource "azurerm_storage_account" "storage" {
