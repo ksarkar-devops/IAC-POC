@@ -3,19 +3,18 @@ name: Terraform Destroy
 on:
   workflow_dispatch:  # Manual trigger to avoid accidental destruction
 
+# Azure credentials via environment variables
+env:
+  TF_VERSION: '1.7.5'
+  AZURE_FUNCTION_DIR: './infra'
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
 jobs:
   destroy:
     runs-on: ubuntu-latest
-
-    # Azure credentials via environment variables
-    env:
-      TF_VERSION: '1.7.5'
-      AZURE_FUNCTION_DIR: './infra'
-      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
