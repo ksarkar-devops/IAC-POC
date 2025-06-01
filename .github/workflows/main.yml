@@ -64,6 +64,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Write Function App Name from Terraform Output
+        id: tf_output_write
+        run: echo "name of func -> ${{ needs.terraform.outputs.function_app_name }}"
+        
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -80,9 +84,10 @@ jobs:
         run: |
           cd published && zip -r ../function.zip .
 
-      - name: Write Function App Name from Terraform Output
-        id: tf_output_write
-        run: echo "name of func - ${{ needs.terraform.outputs.function_app_name }}"
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Upload to Azure Function
         uses: Azure/functions-action@v1
