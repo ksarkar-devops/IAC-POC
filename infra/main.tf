@@ -27,12 +27,6 @@ provider "azurerm" {
   subscription_id = var.subscription_id
 }
 
-resource "random_string" "suffix" {
-  length  = 6
-  upper   = false
-  special = false
-}
-
 resource "azurerm_resource_group" "rg" {
   name     = "funcapp-rg"
   location = "Sweden Central"
