@@ -6,15 +6,23 @@ variable "subscription_id" {}
 
 # Configure the Azure provider
 terraform {
+  required_version = ">= 1.3.0"
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.0.2"
+      version = "~> 3.0"
     }
   }
 
-  required_version = ">= 1.1.0"
+  backend "azurerm" {
+    resource_group_name  = "tfstate-rg"             # Replace with your RG name
+    storage_account_name = "tfstate12345"           # Must be globally unique
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
 }
+
 
 provider "azurerm" {
   features {}
