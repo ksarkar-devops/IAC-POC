@@ -24,7 +24,9 @@ jobs:
           terraform_version: 1.6.6  # Or your preferred version
 
       - name: Terraform Init
+        working-directory: ${{ env.AZURE_FUNCTION_DIR }}
         run: terraform init
 
       - name: Terraform Destroy
+        working-directory: ${{ env.AZURE_FUNCTION_DIR }}
         run: terraform destroy -auto-approve
