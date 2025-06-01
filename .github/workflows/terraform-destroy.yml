@@ -1,4 +1,4 @@
-name: Terraform Destroy
+name: Destroy environment with Terraform
 
 on:
   workflow_dispatch:  # Manual trigger to avoid accidental destruction
