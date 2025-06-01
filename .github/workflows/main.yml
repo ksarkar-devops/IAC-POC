@@ -67,7 +67,7 @@ jobs:
 
       - name: Build Function App
         run: |
-          dotnet publish ./MyDotNetFunctionApp.csproj -c Release -o published
+          dotnet publish ./func/MyDotNetFunctionApp.csproj -c Release -o published
 
       - name: Zip package
         run: |
