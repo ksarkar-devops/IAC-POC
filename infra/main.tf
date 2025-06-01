@@ -17,7 +17,6 @@ terraform {
   }
 }
 
-
 provider "azurerm" {
   features {}
 
@@ -27,10 +26,7 @@ provider "azurerm" {
   subscription_id = var.subscription_id
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = "funcapp-rg"
-  location = "Sweden Central"
-}
+
 
 resource "azurerm_storage_account" "storage" {
   name                     = "funcappstore${random_string.suffix.result}"
