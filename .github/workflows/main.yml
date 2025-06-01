@@ -47,6 +47,9 @@ jobs:
         working-directory: ${{ env.AZURE_FUNCTION_DIR }}
         run: terraform apply -auto-approve -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="tenant_id=${{ secrets.ARM_TENANT_ID }}" -var="subscription_id=${{ secrets.ARM_SUBSCRIPTION_ID }}"
 
+      - name: Destroy runs if the previous step failed or was skipped
+        if: ${{ failure() || cancelled() || steps.previous_step.outcome != 'success' }}
+        run: terraform destroy
 
 
   publish:
