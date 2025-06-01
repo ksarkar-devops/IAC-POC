@@ -32,7 +32,7 @@ jobs:
 
       - name: Terraform Format
         working-directory: ${{ env.AZURE_FUNCTION_DIR }}
-        run: terraform fmt -check
+        run: terraform fmt -recursive
 
       - name: Terraform Validate
         working-directory: ${{ env.AZURE_FUNCTION_DIR }}
