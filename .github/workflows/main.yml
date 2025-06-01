@@ -16,7 +16,7 @@ jobs:
     name: Terraform Apply
     runs-on: ubuntu-latest
     outputs:
-      function_app_name: ${{ steps.get_output.outputs.function_app_name }}
+      function_app_name: ${{ steps.tf_output.outputs.function_app_name }}
 
     steps:
       - name: Checkout code
